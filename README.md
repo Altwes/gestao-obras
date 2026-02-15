@@ -14,7 +14,8 @@ Sistema desenvolvido para o controlo rigoroso de orçamentos de engenharia, perm
 
 * **Java 17** & **Spring Boot 3**
 * **Spring Security** & **JWT** (Autenticação e Autorização)
-* **Spring Data JPA** (Persistência de dados com PostgreSQL/H2)
+* **Spring Data JPA** (Persistência de dados com PostgreSQL)
+* **Docker & Docker Compose** (Containerização e Orquestração)
 * **SpringDoc OpenAPI (Swagger)** (Documentação da API)
 * **Maven** (Gestor de dependências)
 
@@ -27,16 +28,21 @@ Sistema desenvolvido para o controlo rigoroso de orçamentos de engenharia, perm
 
 ## 🚦 Como Executar o Projeto
 
-1.  Clone o repositório:
+1.  **Clone o repositório:**
     ```bash
     git clone [https://github.com/Altwes/gestao-obras.git](https://github.com/Altwes/gestao-obras.git)
     ```
-2.  Instale as dependências:
+
+2.  **Execução com Docker (Recomendado):**
+    Certifique-se de estar na raiz do projeto e execute:
+    ```bash
+    docker-compose up --build
+    ```
+
+3.  **Execução Manual (Local):**
+    Instale as dependências e rode a aplicação (requer PostgreSQL local):
     ```bash
     mvn clean install
-    ```
-3.  Execute a aplicação:
-    ```bash
     mvn spring-boot:run
     ```
 
@@ -48,4 +54,4 @@ Com a aplicação em execução, aceda à documentação através do link:
 > **Nota:** Para testar os endpoints protegidos, utilize o login `admin` e senha `123456` (carregados automaticamente via `import.sql`).
 
 ---
-Desenvolvido por **Wesley** para a apresentação de SOP-CE.
+Desenvolvido por **Wesley** para a apresentação de **SOP-CE**.
