@@ -29,7 +29,7 @@ Sistema desenvolvido para o controlo rigoroso de orçamentos de engenharia, perm
 
 1.  Clone o repositório:
     ```bash
-    git clone [https://github.com/SEU-USUARIO/gestao-obras.git](https://github.com/SEU-USUARIO/gestao-obras.git)
+    git clone [https://github.com/Altwes/gestao-obras.git](https://github.com/Altwes/gestao-obras.git)
     ```
 2.  Instale as dependências:
     ```bash
