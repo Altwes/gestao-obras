@@ -93,7 +93,7 @@ public class MedicaoService {
     }
 
     public List<Medicao> listarTodas() {
-        return repository.findAll();
+       return repository.findAllWithOrcamento();
     }
 
     public Medicao buscarPorId(Long id) {
