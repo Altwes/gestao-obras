@@ -33,9 +33,9 @@ public class MedicaoService {
 
         Orcamento orcamento = orcamentoRepository.findById(dto.getOrcamentoId())
                 .orElseThrow(() -> new RuntimeException("Orçamento não encontrado"));
-
+        long proximoNumero = repository.countByOrcamentoId(dto.getOrcamentoId()) + 1;
         Medicao medicao = new Medicao();
-        medicao.setNumeroMedicao(dto.getNumeroMedicao());
+        medicao.setNumeroMedicao(String.valueOf(proximoNumero));
         medicao.setOrcamento(orcamento);
         medicao.setDataMedicao(LocalDate.now());
         medicao.setObservacao(dto.getObservacao());
@@ -54,11 +54,11 @@ public class MedicaoService {
         }).collect(Collectors.toList());
 
         medicao.setItensMedicao(itensMedicao);
-        
+
         BigDecimal valorTotalMedicao = itensMedicao.stream()
                 .map(ItemMedicao::getValorTotalMedido)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
-        
+
         medicao.setValorMedicao(valorTotalMedicao);
 
         return repository.save(medicao);
@@ -83,21 +83,25 @@ public class MedicaoService {
                 throw new RuntimeException("Erro: A quantidade medida do item [" + itemOriginal.getDescricao()
                         + "] ultrapassa o total do orçamento!");
             }
-            
+
             itemOriginal.setQuantidadeAcumulada(novaQuantidadeAcumulada);
             itemRepository.save(itemOriginal);
         }
-        
+
         medicao.setStatus(StatusMedicao.VALIDADA);
         return repository.save(medicao);
     }
 
     public List<Medicao> listarTodas() {
-       return repository.findAllWithOrcamento();
+        return repository.findAllWithOrcamento();
     }
 
     public Medicao buscarPorId(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Medição não encontrada"));
+    }
+
+    public long obterProximoNumero(Long orcamentoId) {
+        return repository.countByOrcamentoId(orcamentoId) + 1;
     }
 }

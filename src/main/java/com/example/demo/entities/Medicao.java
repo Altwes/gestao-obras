@@ -1,7 +1,6 @@
 package com.example.demo.entities;
 
 import com.example.demo.enums.StatusMedicao;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.*;
 import lombok.*;

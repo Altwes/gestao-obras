@@ -24,14 +24,16 @@ public class MedicaoController {
     @Operation(summary = "Abre uma nova medição para um orçamento")
     public ResponseEntity<ApiResponse<Medicao>> criar(@RequestBody MedicaoRequestDTO dto) {
         Medicao criada = service.criarMedicao(dto);
-        return ResponseEntity.ok(new ApiResponse<>(true, "Medição aberta com sucesso! Lembre-se de validá-la após a conferência.", criada));
+        return ResponseEntity.ok(new ApiResponse<>(true,
+                "Medição aberta com sucesso! Lembre-se de validá-la após a conferência.", criada));
     }
 
     @PatchMapping("/{id}/validar")
     @Operation(summary = "Valida a medição e atualiza o acumulado dos itens no orçamento")
     public ResponseEntity<ApiResponse<Medicao>> validar(@PathVariable Long id) {
         Medicao validada = service.validarMedicao(id);
-        return ResponseEntity.ok(new ApiResponse<>(true, "Medição validada! O saldo dos itens no orçamento foi atualizado.", validada));
+        return ResponseEntity.ok(
+                new ApiResponse<>(true, "Medição validada! O saldo dos itens no orçamento foi atualizado.", validada));
     }
 
     @GetMapping
@@ -39,6 +41,12 @@ public class MedicaoController {
     public ResponseEntity<ApiResponse<List<Medicao>>> listarTodas() {
         List<Medicao> lista = service.listarTodas();
         return ResponseEntity.ok(new ApiResponse<>(true, "Lista de medições carregada.", lista));
+    }
+
+    @GetMapping("/proximo-numero/{orcamentoId}")
+    public ResponseEntity<Long> getProximoNumero(@PathVariable Long orcamentoId) {
+        long proximo = service.obterProximoNumero(orcamentoId);
+        return ResponseEntity.ok(proximo);
     }
 
     @GetMapping("/{id}")
