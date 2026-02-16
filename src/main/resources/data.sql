@@ -1,5 +1,5 @@
 -- 1. Usuário Admin (Senha: 123456)
-INSERT INTO tb_usuario (login, senha, role) VALUES ('admin','$2a$10$8.UnVuG9HHgffUDAlk8qfOuVGkqRzgVymGe07xd00DMxs.TVuHOnC','ROLE_ADMIN');
+INSERT INTO tb_usuario (login, senha, role) VALUES ('admin','$2a$10$T3AKqPn1fNjuxpqxl1OrauvBcQ0GGuLsRfEKxAd7WNdEtqedS57Vy','ROLE_ADMIN');
 
 -- 2. Orçamento (ID será 1)
 INSERT INTO tb_orcamento (numero_protocolo, tipo_orcamento, valor_total, data_criacao, status) 
