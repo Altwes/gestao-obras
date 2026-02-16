@@ -28,7 +28,7 @@ public class OrcamentoService {
         orcamento.setTipoOrcamento(dto.getTipoOrcamento());
         orcamento.setValorTotal(dto.getValorTotal());
         orcamento.setDataCriacao(LocalDate.now());
-        orcamento.setStatus(StatusOrcamento.ABERTO); // Regra 1: Inicia como Aberto
+        orcamento.setStatus(StatusOrcamento.ABERTO); 
 
         mapItens(dto, orcamento);
 
@@ -39,19 +39,16 @@ public class OrcamentoService {
     public Orcamento atualizar(Long id, OrcamentoRequestDTO dto) {
         Orcamento orcamentoExistente = buscarPorId(id);
 
-        // Regra: Não permitir edição se o status for FINALIZADO
         if (StatusOrcamento.FINALIZADO.equals(orcamentoExistente.getStatus())) {
             throw new RuntimeException("Não é permitido edição de orçamento com status FINALIZADO.");
         }
 
         validarSomaItens(dto);
 
-        // Atualiza campos básicos
         orcamentoExistente.setNumeroProtocolo(dto.getNumeroProtocolo());
         orcamentoExistente.setTipoOrcamento(dto.getTipoOrcamento());
         orcamentoExistente.setValorTotal(dto.getValorTotal());
 
-        // Atualiza a lista de itens (limpa os antigos e adiciona os novos do DTO)
         orcamentoExistente.getItens().clear();
         mapItens(dto, orcamentoExistente);
 
@@ -76,7 +73,6 @@ public class OrcamentoService {
         repository.delete(orcamento);
     }
 
-    // Método auxiliar para validar a soma dos itens
     private void validarSomaItens(OrcamentoRequestDTO dto) {
         BigDecimal somaItens = dto.getItens().stream()
                 .map(i -> i.getValorUnitario().multiply(i.getQuantidade()))
@@ -88,7 +84,6 @@ public class OrcamentoService {
         }
     }
 
-    // Método auxiliar para converter DTO em Entidade Item
     private void mapItens(OrcamentoRequestDTO dto, Orcamento orcamento) {
         List<Item> itens = dto.getItens().stream().map(iDto -> {
             Item item = new Item();
@@ -96,7 +91,7 @@ public class OrcamentoService {
             item.setQuantidade(iDto.getQuantidade());
             item.setValorUnitario(iDto.getValorUnitario());
             item.setValorTotal(iDto.getValorUnitario().multiply(iDto.getQuantidade()));
-            item.setQuantidadeAcumulada(BigDecimal.ZERO); // Inicialmente 0 conforme review
+            item.setQuantidadeAcumulada(BigDecimal.ZERO);
             item.setOrcamento(orcamento);
             return item;
         }).collect(Collectors.toList());

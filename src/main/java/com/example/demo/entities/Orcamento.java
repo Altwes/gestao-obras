@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -30,6 +31,6 @@ public class Orcamento {
     @Enumerated(EnumType.STRING)
     private StatusOrcamento status = StatusOrcamento.ABERTO;
 
-    @OneToMany(mappedBy = "orcamento", cascade = CascadeType.ALL)
-    private List<Item> itens;
+    @OneToMany(mappedBy = "orcamento", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Item> itens = new ArrayList<>();
 }
