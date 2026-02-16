@@ -10,7 +10,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "tb_medicao")
+@Table(name = "tb_medicao", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"numero_medicao", "orcamento_id"})
+})
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
