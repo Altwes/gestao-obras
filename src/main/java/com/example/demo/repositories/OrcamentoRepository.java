@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface OrcamentoRepository extends JpaRepository<Orcamento, Long> {
+    boolean existsByNumeroProtocolo(String numeroProtocolo);
 }
