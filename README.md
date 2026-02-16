@@ -51,7 +51,7 @@ Sistema desenvolvido para o controlo rigoroso de orçamentos de engenharia, perm
 Com a aplicação em execução, aceda à documentação através do link:
 `http://localhost:8080/swagger-ui/index.html`
 
-> **Nota:** Para testar os endpoints protegidos, utilize o login `admin` e senha `123456` (carregados automaticamente via `import.sql`).
+> **Nota:** Para testar os endpoints protegidos, utilize o login `admin` e senha `123456` (carregados automaticamente via `data.sql`).
 
 ---
 Desenvolvido por **Wesley** para a apresentação de **SOP-CE**.
