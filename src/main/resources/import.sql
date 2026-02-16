@@ -1,6 +1,6 @@
 -- 1. Criar Usuário Administrador (Senha: 123456 - criptografada em BCrypt)
 -- Nota: Verifique se sua tabela se chama tb_usuarios ou usuario conforme seu código
-INSERT INTO tb_usuarios (login, senha, role) VALUES ('admin', '$2a$10$8.UnVuG9HHgffUDAlk8qfOuVGkqRzgVymGe07xd00DMxs.TVuHOnC', 'ROLE_ADMIN');
+INSERT INTO tb_usuario (login, senha, role) VALUES ('admin', '$2a$10$8.UnVuG9HHgffUDAlk8qfOuVGkqRzgVymGe07xd00DMxs.TVuHOnC', 'ROLE_ADMIN');
 
 -- 2. Criar um Orçamento de Exemplo (Status ABERTO)
 INSERT INTO tb_orcamento (numero_protocolo, tipo_orcamento, valor_total, data_criacao, status) 
