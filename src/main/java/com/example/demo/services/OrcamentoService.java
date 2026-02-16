@@ -28,7 +28,7 @@ public class OrcamentoService {
         orcamento.setTipoOrcamento(dto.getTipoOrcamento());
         orcamento.setValorTotal(dto.getValorTotal());
         orcamento.setDataCriacao(LocalDate.now());
-        orcamento.setStatus(StatusOrcamento.ABERTO); 
+        orcamento.setStatus(StatusOrcamento.ABERTO);
 
         mapItens(dto, orcamento);
 
@@ -40,7 +40,7 @@ public class OrcamentoService {
         Orcamento orcamentoExistente = buscarPorId(id);
 
         if (StatusOrcamento.FINALIZADO.equals(orcamentoExistente.getStatus())) {
-            throw new RuntimeException("Não é permitido edição de orçamento com status FINALIZADO.");
+            throw new RuntimeException("Este orçamento está FINALIZADO e não permite mais alterações.");
         }
 
         validarSomaItens(dto);
@@ -48,6 +48,14 @@ public class OrcamentoService {
         orcamentoExistente.setNumeroProtocolo(dto.getNumeroProtocolo());
         orcamentoExistente.setTipoOrcamento(dto.getTipoOrcamento());
         orcamentoExistente.setValorTotal(dto.getValorTotal());
+
+        if (dto.getStatus() != null) {
+            try {
+                orcamentoExistente.setStatus(StatusOrcamento.valueOf(dto.getStatus()));
+            } catch (IllegalArgumentException e) {
+                throw new RuntimeException("Status inválido: " + dto.getStatus());
+            }
+        }
 
         orcamentoExistente.getItens().clear();
         mapItens(dto, orcamentoExistente);
@@ -79,8 +87,8 @@ public class OrcamentoService {
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         if (somaItens.compareTo(dto.getValorTotal()) != 0) {
-            throw new RuntimeException("A soma dos valores dos itens (" + somaItens + 
-                ") não coincide com o valor total do orçamento (" + dto.getValorTotal() + ")!");
+            throw new RuntimeException("A soma dos valores dos itens (" + somaItens +
+                    ") não coincide com o valor total do orçamento (" + dto.getValorTotal() + ")!");
         }
     }
 
@@ -95,7 +103,7 @@ public class OrcamentoService {
             item.setOrcamento(orcamento);
             return item;
         }).collect(Collectors.toList());
-        
+
         orcamento.getItens().addAll(itens);
     }
 }

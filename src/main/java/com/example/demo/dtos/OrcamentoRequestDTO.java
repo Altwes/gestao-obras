@@ -9,5 +9,6 @@ public class OrcamentoRequestDTO {
     private String numeroProtocolo;
     private String tipoOrcamento;
     private BigDecimal valorTotal;
+    private String status;
     private List<ItemRequestDTO> itens;
 }
