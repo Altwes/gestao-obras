@@ -59,6 +59,7 @@ public class ItemMedicaoService {
             throw new RuntimeException("Não é permitido excluir itens de uma medição VALIDADA!");
         }
         Medicao medicao = itemMed.getMedicao();
+        medicao.getItensMedicao().remove(itemMed);
         repository.delete(itemMed);
         recalcularTotalMedicao(medicao);
     }
