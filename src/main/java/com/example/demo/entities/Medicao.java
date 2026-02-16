@@ -10,9 +10,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "tb_medicao", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"numero_medicao", "orcamento_id"})
-})
+@Table(name = "tb_medicao", uniqueConstraints = { @UniqueConstraint(columnNames = { "numeroMedicao", "orcamento_id" }) })
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,8 +18,7 @@ public class Medicao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String numeroMedicao;
 
     private LocalDate dataMedicao;
@@ -32,12 +29,10 @@ public class Medicao {
 
     private String observacao;
 
-    @JsonIgnoreProperties
     @ManyToOne
     @JoinColumn(name = "orcamento_id")
     private Orcamento orcamento;
 
     @OneToMany(mappedBy = "medicao", cascade = CascadeType.ALL)
     private List<ItemMedicao> itensMedicao;
-    
 }
