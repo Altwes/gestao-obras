@@ -1,7 +1,7 @@
 package com.example.demo.entities;
 
 import com.example.demo.enums.StatusMedicao;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -30,7 +30,7 @@ public class Medicao {
 
     private String observacao;
 
-    @JsonIgnore
+    @JsonIgnoreProperties
     @ManyToOne
     @JoinColumn(name = "orcamento_id")
     private Orcamento orcamento;
