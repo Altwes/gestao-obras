@@ -2,7 +2,9 @@ package com.example.demo.services;
 
 import com.example.demo.dtos.OrcamentoRequestDTO;
 import com.example.demo.entities.Orcamento;
+import com.example.demo.repositories.MedicaoRepository;
 import com.example.demo.entities.Item;
+import com.example.demo.enums.StatusMedicao;
 import com.example.demo.enums.StatusOrcamento;
 import com.example.demo.repositories.OrcamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,9 @@ public class OrcamentoService {
 
     @Autowired
     private OrcamentoRepository repository;
-
+    @Autowired
+    private MedicaoRepository medicaoRepository;
+    
     @Transactional
     public Orcamento salvar(OrcamentoRequestDTO dto) {
         validarSomaItens(dto);
@@ -37,10 +41,18 @@ public class OrcamentoService {
 
     @Transactional
     public Orcamento atualizar(Long id, OrcamentoRequestDTO dto) {
+        
         Orcamento orcamentoExistente = buscarPorId(id);
 
         if (StatusOrcamento.FINALIZADO.equals(orcamentoExistente.getStatus())) {
             throw new RuntimeException("Este orçamento está FINALIZADO e não permite mais alterações.");
+        }
+
+        if ("FINALIZADO".equals(dto.getStatus())) {
+            boolean temMedicaoAberta = medicaoRepository.existsByOrcamentoIdAndStatus(id, StatusMedicao.ABERTA);
+            if (temMedicaoAberta) {
+                throw new RuntimeException("Não é permitido finalizar o orçamento enquanto houver medições com status ABERTA.");
+            }
         }
 
         validarSomaItens(dto);

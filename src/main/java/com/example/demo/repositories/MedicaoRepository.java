@@ -17,4 +17,5 @@ public interface MedicaoRepository extends JpaRepository<Medicao, Long> {
     List<Medicao> findAllWithOrcamento();
     @Query("SELECT COUNT(m) FROM Medicao m WHERE m.orcamento.id = :orcamentoId")
     long countByOrcamentoId(@Param("orcamentoId") Long orcamentoId);
+    boolean existsByOrcamentoIdAndStatus(Long orcamentoId, StatusMedicao status);
 }
