@@ -1,5 +1,4 @@
 -- 1. Criar Usuário Administrador (Senha: 123456 - criptografada em BCrypt)
--- Nota: Verifique se sua tabela se chama tb_usuarios ou usuario conforme seu código
 INSERT INTO tb_usuario (login, senha, role) VALUES ('admin', '$2a$10$8.UnVuG9HHgffUDAlk8qfOuVGkqRzgVymGe07xd00DMxs.TVuHOnC', 'ROLE_ADMIN')ON CONFLICT (login) DO NOTHING;;
 
 -- 2. Criar um Orçamento de Exemplo (Status ABERTO)
@@ -7,7 +6,6 @@ INSERT INTO tb_orcamento (numero_protocolo, tipo_orcamento, valor_total, data_cr
 VALUES ('OBRA-2026-001', 'Reforma Escritório Central', 10000.00, CURRENT_DATE, 'ABERTO');
 
 -- 3. Criar Itens para o Orçamento (Vinculados ao orcamento_id = 1)
--- Regra: Valor Total = Quantidade * Valor Unitario
 INSERT INTO tb_item (descricao, quantidade, valor_unitario, valor_total, quantidade_acumulada, orcamento_id) 
 VALUES ('Piso Porcelanato 60x60', 100.0, 50.00, 5000.00, 0.0, 1);
 
