@@ -3,6 +3,7 @@ package com.example.demo.entities;
 import jakarta.persistence.*;
 import lombok.*;
 import java.math.BigDecimal;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_item")
@@ -21,6 +22,7 @@ public class Item {
     private BigDecimal valorTotal;
     private BigDecimal quantidadeAcumulada = BigDecimal.ZERO;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "orcamento_id")
     private Orcamento orcamento;

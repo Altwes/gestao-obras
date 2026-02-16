@@ -1,6 +1,8 @@
 package com.example.demo.entities;
 
 import com.example.demo.enums.StatusMedicao;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.*;
 import java.math.BigDecimal;
@@ -28,6 +30,7 @@ public class Medicao {
 
     private String observacao;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "orcamento_id")
     private Orcamento orcamento;
