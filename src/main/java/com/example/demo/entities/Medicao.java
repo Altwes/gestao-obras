@@ -32,6 +32,6 @@ public class Medicao {
     @JoinColumn(name = "orcamento_id")
     private Orcamento orcamento;
 
-    @OneToMany(mappedBy = "medicao", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "medicao")
     private List<ItemMedicao> itensMedicao;
 }

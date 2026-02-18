@@ -4,7 +4,7 @@ import com.example.demo.entities.Medicao;
 import com.example.demo.enums.StatusMedicao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param; // Adicione esta importação
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import java.util.Optional;
 import java.util.List;

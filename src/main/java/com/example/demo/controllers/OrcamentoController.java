@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/orcamentos")
-@SecurityRequirement(name = "bearerAuth") // Garante que o Swagger peça o token
+@SecurityRequirement(name = "bearerAuth")
 public class OrcamentoController {
 
     @Autowired
