@@ -31,7 +31,6 @@ public class Orcamento {
     @Enumerated(EnumType.STRING)
     private StatusOrcamento status = StatusOrcamento.ABERTO;
 
-    //@OneToMany(mappedBy = "orcamento", cascade = CascadeType.ALL, orphanRemoval = true)
-    @OneToMany(mappedBy = "orcamento", orphanRemoval = true)
+    @OneToMany(mappedBy = "orcamento", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Item> itens = new ArrayList<>();
 }
